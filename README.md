@@ -1,136 +1,192 @@
-# 🛡️ SENTINEL : Urban Conflict Resolver
+# 🛡️ SENTINEL — Urban Resource Conflict Resolver
 
-AI-Powered Urban Resource Conflict Detection & Risk Intelligence Platform  
+![Python](https://img.shields.io/badge/Python-3.9+-blue?style=for-the-badge&logo=python)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
+![Machine Learning](https://img.shields.io/badge/Machine%20Learning-RandomForest-green?style=for-the-badge&logo=scikit-learn)
+![NetworkX](https://img.shields.io/badge/Graph-NetworkX-orange?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
 
 ---
 
-## 🚀 Overview
+## 🌐 Live App
 
-SENTINEL is an AI-driven Smart City intelligence platform designed to detect, analyze, and visualize conflicts between overlapping urban resource requests such as:
+### 👉 [Launch SENTINEL](https://sentinel-urban-conflict-resolver-m4uuejrrhb2reahiamyaoa.streamlit.app/)
 
-- 💧 Water Supply
-- ⚡ Electricity
-- 🚦 Transport
-- 📡 Telecom
+---
 
-The system identifies high-risk overlaps based on time, location proximity, and department impact, enabling smarter urban planning and coordination.
+## 📌 Overview
+
+In a rapidly developing city, multiple departments — **Water, Electricity, Transport, and Telecom** — often attempt to utilize the same physical space or resources simultaneously (e.g., digging up a road for cables while it is being paved).
+
+**SENTINEL** is an AI-powered urban conflict resolution dashboard that:
+- Detects overlapping resource usage requests in real time
+- Scores the severity of each conflict
+- Predicts future conflicts using Machine Learning before approving new requests
+- Suggests resolution strategies — rescheduling or relocation
+- Visualizes conflicts as a graph network and on a geospatial map
 
 ---
 
 ## 🎯 Problem Statement
 
-In smart cities, multiple infrastructure departments often schedule activities independently.  
-When two high-impact services overlap in the same area and time, it creates:
+> **Hackathon — Code4Society | Problem 04: Intelligent Urban Resource Conflict Detector**
 
-- Traffic congestion  
-- Utility failures  
-- Service interruptions  
-- Public inconvenience  
-
-SENTINEL solves this by detecting conflicts before they escalate.
+Objective: Prevent operational clashes and resource wastage by predicting conflicting schedules or spatial usage using **graph dependency modeling** and **correlation analysis**.
 
 ---
 
-## 🧠 Core Features
+## ✨ Features
 
-✅ Conflict Detection Engine  
-✅ AI-Based Severity Scoring  
-✅ Real-Time Progress Monitoring  
-✅ Visual Conflict Network Graph  
-✅ Geospatial Conflict Mapping  
-✅ ML Feature Importance Analysis  
-✅ Risk Intelligence Dashboard  
-
----
-
-## 🏗️ How It Works
-
-The system analyzes pairwise urban requests using:
-
-### 🔹 Conflict Severity Formula
-
-Severity Score = Overlap Hours × Department Impact
-
-
-Where:
-
-- Overlap Hours → Time overlap between two requests
-- Department Impact → Weighted importance of departments
-- Distance → Geographical proximity between locations
+| Feature | Description |
+|---|---|
+| 🔍 Conflict Detection Engine | Detects all overlapping department requests using time + geo analysis |
+| 📊 Conflict Score Metric | Scores severity using `overlap_hours × department_impact` |
+| 🕸️ Visual Conflict Network | Graph with nodes (requests) and edges (conflicts) using NetworkX |
+| 🤖 ML Conflict Predictor | Random Forest model predicts if a NEW request will conflict before approval |
+| 🛠️ Resolution Engine | Suggests rescheduling or relocation for every detected conflict |
+| 📈 Correlation Analysis | Department vs Department clash heatmap + location conflict frequency |
+| 🗺️ Geospatial Map | Interactive Folium map showing conflict hotspots across Pune |
+| 📋 KPI Dashboard | Total requests, conflicts, impact score, avg severity at a glance |
 
 ---
 
-## 🤖 Machine Learning Model
 
-We use:
+## 🚀 How to Run Locally
 
-- **Random Forest Classifier**
-- Features:
-  - Overlap Hours
-  - Department Impact
-  - Distance
+### 1. Clone the Repository
+```bash
+git clone https://github.com/YOUR_USERNAME/SENTINEL.git
+cd SENTINEL
+```
 
-The model helps predict high-risk conflicts and determine feature importance.
+### 2. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
 
----
+### 3. Run the App
+```bash
+streamlit run app.py
+```
 
-## 📊 Dashboard Components
-
-- 📌 KPI Metrics (Total Requests, Conflicts, Severity)
-- 🔥 Top 3 High-Risk Locations
-- 📈 Conflict Severity Distribution
-- ⏱ Hourly Congestion Trend
-- 🕸 Conflict Network Visualization (Graph-based)
-- 🗺 Department-wise Conflict Map
-
----
-
-## 🛠️ Tech Stack
-
-- Python
-- Streamlit
-- Pandas
-- NetworkX
-- Folium
-- Scikit-learn
-- Matplotlib
-- NumPy
-- Geopy
+### 4. Upload Dataset
+- Use the sidebar to upload a CSV file
+- Sample datasets are provided in the `/datasets` folder
 
 ---
 
-## 🗺️ Use Cases
+## 📂 Project Structure
 
-- Smart City Planning
-- Municipal Coordination
-- Infrastructure Scheduling
-- Disaster Management
-- Urban Traffic Optimization
-- Government Planning Departments
+```
+SENTINEL/
+│
+├── app.py                  # Main Streamlit dashboard
+├── main.py                 # Core UrbanConflictDetector class
+├── requirements.txt        # Python dependencies
+├── README.md               # Project documentation
+│
+└── datasets/
+    ├── dataset_small.csv       # 20 rows — quick testing
+    ├── dataset_medium.csv      # 40 rows — graph & heatmap testing
+    ├── dataset_large.csv       # 60 rows — ML & resolution testing
+    └── sentinel_dataset.csv    # 120 rows — full combined dataset
+```
 
 ---
 
-## ⚡ Deployment
+## 📋 Dataset Format
 
-The application is deployed on **Streamlit Cloud** for real-time access.
+Your CSV file must have these exact column names:
 
-
+| Column | Description | Example |
+|---|---|---|
+| `request_id` | Unique request identifier | REQ_001 |
+| `department` | Department name | Water / Electricity / Transport / Telecom |
+| `resource_location` | Location name | Wakad_Chowk |
+| `start_time` | Work start datetime | 2024-01-15 08:00 |
+| `end_time` | Work end datetime | 2024-01-15 14:00 |
 
 ---
 
-## 👨‍💻 Team KB
+## 🧠 How It Works
 
-**Project Name:** SENTINEL – Urban Conflict Detector  
+```
+CSV Upload
+    ↓
+Conflict Detection Engine
+(Time overlap + Geodesic distance check for every pair)
+    ↓
+Conflict Score = overlap_hours × department_impact
+    ↓
+Graph Built (NetworkX) → Nodes = Requests, Edges = Conflicts
+    ↓
+Random Forest ML Model trained on [overlap_hours, impact, distance]
+    ↓
+┌─────────────────────────────────────┐
+│  Dashboard Sections                 │
+│  • KPI Metrics                      │
+│  • Risk Intelligence                │
+│  • Conflict Analytics               │
+│  • Visual Network Graph             │
+│  • ML Conflict Predictor            │
+│  • Resolution Engine                │
+│  • Correlation Heatmap              │
+│  • Geospatial Map                   │
+└─────────────────────────────────────┘
+```
 
-### Team Members:
-- Ayush Bankar  
-- Suraj Madane  
-- Jay Godse  
-- Abhijeet Chavan  
-- Swarangi Kothawade  
+---
+
+## 🏗️ Tech Stack
+
+| Technology | Usage |
+|---|---|
+| Python | Core language |
+| Streamlit | Web dashboard framework |
+| NetworkX | Graph modeling & visualization |
+| Scikit-learn | Random Forest ML model |
+| Pandas | Data processing |
+| Folium | Interactive geospatial map |
+| Matplotlib | Charts and plots |
+| Seaborn | Correlation heatmap |
+| Geopy | Geodesic distance calculation |
+| NumPy | Numerical computation |
+
+---
+
+## 📦 Requirements
+
+```
+streamlit
+pandas
+networkx
+folium
+streamlit-folium
+geopy
+scikit-learn
+matplotlib
+numpy
+seaborn
+```
+
 ---
 
 
-## ⭐ If You Like This Project
 
-Give this repository a ⭐ on GitHub!
+## 🏆 Built For
+
+> **Hackathon — Code4Society**
+> Problem Statement 04 — Intelligent Urban Resource Conflict Detector
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** — feel free to use, modify and distribute.
+
+---
+
+<div align="center">
+    <b>Made with ❤️ by Team KB</b><br>
+    <a href="https://sentinel-urban-conflict-resolver-m4uuejrrhb2reahiamyaoa.streamlit.app/">🚀 Try SENTINEL Live</a>
+</div>
